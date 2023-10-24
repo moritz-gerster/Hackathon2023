@@ -33,16 +33,16 @@ def correlations(fname="steinmetz_2016-12-14_Cori.nc", brain_area="MOs"):
     fg = fit_fooof(freqs, psd)
     offsets = fg.get_params('aperiodic_params', "offset")
     exponents = fg.get_params('aperiodic_params', "exponent")
-    aperiodic_powers = get_aperiodic_powers(freqs, psd, log=True)
-    aperiodic_powers_mean = aperiodic_powers.mean(1)
+    aperiodic_powers = get_aperiodic_powers(freqs, psd)
+    aperiodic_powers_mean_log = np.log10(aperiodic_powers).mean(1)
     theta_power = band_power(fg, "theta")
     alpha_power = band_power(fg, "alpha")
 
     plot_correlation(spiking, median_psd, "Median Power Spectral Density")
     plot_correlation(spiking, offsets, "PSD Offset")
     plot_correlation(spiking, exponents, "PSD Exponent")
-    plot_correlation(spiking, aperiodic_powers_mean,
-                     "Mean Aperiodic Power")
+    plot_correlation(spiking, aperiodic_powers_mean_log,
+                     "Mean Aperiodic Log Power")
     plot_correlation(spiking, theta_power, "Theta Power")
     plot_correlation(spiking, alpha_power, "Alpha Power")
 
@@ -65,7 +65,7 @@ def fit_fooof(freqs, psd):
     return fg
 
 
-def get_aperiodic_powers(freqs, psd, mean=False, log=False):
+def get_aperiodic_powers(freqs, psd, mean=False):
     fm = SpectralModel(**cfg.FOOOF_PARAMS)
     mean_aperiodic_powers = []
     for trial_pwr in psd:
@@ -74,8 +74,6 @@ def get_aperiodic_powers(freqs, psd, mean=False, log=False):
         aperiodic_power = 10**offset * freqs[1:]**(-exponent)
         mean_aperiodic_powers.append(aperiodic_power)
     mean_aperiodic_powers = np.array(mean_aperiodic_powers)
-    if log:
-        mean_aperiodic_powers = np.log(mean_aperiodic_powers)
     return mean_aperiodic_powers
 
 
@@ -99,7 +97,11 @@ def plot_example(freqs, psd, aperiodic_powers, neural_spiking, n_trials=30):
     argmax_trial = _get_best_trial(psd, best_neuron, n_trials)
     fontsize = 15
 
-    mean_aperiodic_powers = aperiodic_powers.mean(1)
+    # mean_aperiodic_powers = aperiodic_powers.mean(1)
+    time_bins = neural_spiking.shape[-1]
+    freq_bins = aperiodic_powers.shape[-1]
+    ones_freqs = np.ones(freq_bins)
+    ones_time = np.ones(time_bins)
 
     fig, axes = plt.subplots(3, n_trials, figsize=(20, 10), sharey="row",
                              sharex=False,
@@ -108,7 +110,8 @@ def plot_example(freqs, psd, aperiodic_powers, neural_spiking, n_trials=30):
     for i, trial in enumerate(range(argmax_trial, argmax_trial + n_trials)):
         axes[0, i].loglog(freqs, psd[trial], "k")
         axes[0, i].loglog(freqs[1:], aperiodic_powers[trial], "darkorange")
-        axes[0, i].loglog(freqs[1:], mean_aperiodic_powers[trial], "r")
+        trial_mean = ones_freqs * aperiodic_powers[trial].mean()
+        axes[0, i].loglog(freqs[1:], trial_mean, "r")
         axes[0, i].set_xticks([])
         axes[0, i].set_yticks([])
         axes[0, i].set_xlim(freqs[0], freqs[-1])
@@ -118,12 +121,11 @@ def plot_example(freqs, psd, aperiodic_powers, neural_spiking, n_trials=30):
         axes[1, i].set_xticks([])
 
         axes[2, i].plot(mean_firing_rate[trial], "k")
-        x_bins = mean_firing_rate[trial].shape[0]
-        mean_firing_rate_avg = np.ones(x_bins) * mean_firing_rate[trial].mean()
+        mean_firing_rate_avg = ones_time * mean_firing_rate[trial].mean()
         axes[2, i].plot(mean_firing_rate_avg, "b")
         # mean_ap_powers_scaled = mean_ap_powers[trial] / mean_ap_powers.max()
         # mean_ap_powers_scaled *= np.nanmax(mean_firing_rate)
-        # mean_ap_powers_scaled = np.ones(x_bins) * mean_ap_powers_scaled.mean()
+        # mean_ap_powers_scaled = ones * mean_ap_powers_scaled.mean()
         # axes[2, i].plot(mean_ap_powers_scaled, "darkorange")
         axes[2, i].set_xticks([])
 
