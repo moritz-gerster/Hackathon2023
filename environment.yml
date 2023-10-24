@@ -9,7 +9,7 @@ dependencies:
   - pandas
   - matplotlib
   - fooof
-  # - seaborn  # df plotting
+  - seaborn  # df plotting
   - pytest  # development
   - pylint  # development
   - flake8  # development
