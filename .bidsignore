@@ -1,0 +1,4 @@
+# Ignore extra files and folders. Important for running the bidsvalidator
+rawdata/meta_infos/*
+rawdata/phenotype/UPDRS.xlsx
+
