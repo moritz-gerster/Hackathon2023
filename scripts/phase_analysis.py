@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import pingouin as pg
 from os.path import join
 
+1/0
+
 
 def phase_spiking(fname="steinmetz_2016-12-14_Cori.nc", brain_area="MOs"):
 
