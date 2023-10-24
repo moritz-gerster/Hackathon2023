@@ -1,6 +1,8 @@
+from scripts.analysis_functions import correlations
 
 def main():
-    pass
+    correlations()
+
 
 if __name__ == '__main__':
     main()

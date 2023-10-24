@@ -19,15 +19,9 @@ def _load_lfp(data, brain_area):
     return brain_area_lfp
 
 
-def _load_spiking(data, brain_area, area_mean=False, trial_sum=False):
+def _load_spiking(data, brain_area):
     brain_areas = data.variables["brain_area"][:]
     brain_area_idx = np.where(brain_areas == brain_area)[0]
     spiking_data = data.variables["spike_rate"]
     neural_spiking = spiking_data[brain_area_idx].data
-    if area_mean:
-        # neural_spiking has shape (n_neurons, n_trials, n_timepoints)
-        # -> average across all neurons to get spiking over entire brain area
-        neural_spiking = neural_spiking.mean(0)
-    if trial_sum:
-        neural_spiking = neural_spiking.sum(-1)
     return neural_spiking
