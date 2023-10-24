@@ -8,7 +8,6 @@ dependencies:
   - netCDF4
   - pandas
   - matplotlib
-  - fooof
   - seaborn  # df plotting
   - pytest  # development
   - pylint  # development
@@ -18,6 +17,7 @@ dependencies:
   # - statannotations  # for df stats
   - pip
   - pip:
+    - specparam
     - -e .  # fooof and mne-multi-connectivity and scripts
     # - ptitprince  # remember to cite, raincloudplots
     # - numpy==1.23.4  # otherwise ptitprince does not work
