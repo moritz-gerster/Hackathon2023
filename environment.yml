@@ -18,6 +18,7 @@ dependencies:
   - pip
   - pip:
     - specparam
+    - pingouin
     - -e .  # fooof and mne-multi-connectivity and scripts
     # - ptitprince  # remember to cite, raincloudplots
     # - numpy==1.23.4  # otherwise ptitprince does not work
