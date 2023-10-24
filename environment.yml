@@ -14,12 +14,8 @@ dependencies:
   - flake8  # development
   - autopep8  # development
   - ipykernel  # jupyter notebooks
-  # - statannotations  # for df stats
   - pip
   - pip:
     - specparam
     - pingouin
-    - -e .  # fooof and mne-multi-connectivity and scripts
-    # - ptitprince  # remember to cite, raincloudplots
-    # - numpy==1.23.4  # otherwise ptitprince does not work
-    # - pte-stats  # Richard's stats for cluster permutation tests
+    - -e .
