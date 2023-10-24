@@ -5,6 +5,8 @@ channels:
 dependencies:
   - numpy
   - scipy
+  - netCDF4
+  - pandas
   - matplotlib
   - fooof
   # - seaborn  # df plotting
