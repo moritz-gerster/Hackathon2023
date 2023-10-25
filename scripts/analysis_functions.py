@@ -32,7 +32,7 @@ def correlations(fname="steinmetz_2016-12-14_Cori.nc", brain_area="MOs"):
     median_psd = np.median(psd, axis=1)
 
     save_path = join(cfg.PLOT_PATH, brain_area)
-    Path(save_path).mkdir(exist_ok=True)
+    Path(save_path).mkdir(exist_ok=True, parents=True)
     fg = fit_fooof(freqs, psd, save_path=save_path)
     offsets = fg.get_params('aperiodic_params', "offset")
     exponents = fg.get_params('aperiodic_params', "exponent")
