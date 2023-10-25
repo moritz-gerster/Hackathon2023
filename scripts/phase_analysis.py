@@ -1,10 +1,12 @@
-from scripts.utils import _load_data, _load_lfp, _load_spiking
-import scripts.config as cfg
-from scipy.signal import butter, lfilter, hilbert
-import numpy as np
-import matplotlib.pyplot as plt
-import pingouin as pg
 from os.path import join
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pingouin as pg
+from scipy.signal import butter, hilbert, lfilter
+
+import scripts.config as cfg
+from scripts.utils import _load_data, _load_lfp, _load_spiking
 
 
 def phase_spiking(fname="steinmetz_2016-12-14_Cori.nc", brain_area="MOs"):
@@ -13,13 +15,14 @@ def phase_spiking(fname="steinmetz_2016-12-14_Cori.nc", brain_area="MOs"):
     lfp = _load_lfp(data, brain_area)
     neural_spiking = _load_spiking(data, brain_area)
 
-    spike_plot(lfp, neural_spiking, "alpha")
-    spike_plot(lfp, neural_spiking, "theta")
-    spike_plot_by_trials(lfp, neural_spiking, "alpha")
-    spike_plot_by_trials(lfp, neural_spiking, "theta")
+    save_path = join(cfg.PLOT_PATH, brain_area)
+    spike_plot(lfp, neural_spiking, "alpha", save_path=save_path)
+    spike_plot(lfp, neural_spiking, "theta", save_path=save_path)
+    spike_plot_by_trials(lfp, neural_spiking, "alpha", save_path=save_path)
+    spike_plot_by_trials(lfp, neural_spiking, "theta", save_path=save_path)
 
 
-def spike_plot(lfp, neural_spiking, band):
+def spike_plot(lfp, neural_spiking, band, save_path=None):
     # pooled_neurons = neural_spiking.sum(0)
     # concatenate all 364 trials together
     spike_lfp_phases = _get_spike_lfp_phases(lfp, neural_spiking, band)
@@ -43,11 +46,12 @@ def spike_plot(lfp, neural_spiking, band):
     plt.title("Spike-LFP Phase Distribution Alpha band \n Number of spikes: "
               "{sum(spiking_activity_global_concatenate)}\n p_value= "
               "{p_value}", va='bottom')
-    save_path = join(cfg.PLOT_PATH, f"spike_lfp_phase_distribution_{band}.pdf")
-    plt.savefig(save_path)
+    save_path = join(save_path, f"spike_lfp_phase_distribution_{band}.pdf")
+    if save_path:
+        plt.savefig(save_path)
 
 
-def spike_plot_by_trials(lfp, neural_spiking, band):
+def spike_plot_by_trials(lfp, neural_spiking, band, save_path=None):
     significant_trials_band = []
     lowcut, highcut = cfg.BANDS[band]
 
@@ -118,7 +122,8 @@ def spike_plot_by_trials(lfp, neural_spiking, band):
                       va='bottom')
             fig_name = (f"spike_lfp_phase_distribution_trial_{trial_idx}_"
                         f"{band}.pdf")
-            plt.savefig(join(cfg.PLOT_PATH, fig_name))
+            if save_path:
+                plt.savefig(join(save_path, fig_name))
     print(f"significant phase-locking with {band} in trials #: "
           f"{significant_trials_band}")
 
