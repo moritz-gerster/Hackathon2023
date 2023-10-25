@@ -92,7 +92,8 @@ def plot_correlation(x, y, y_label, x_label="Spikes per epoch", save_path=None):
     sns.regplot(x=x, y=y, label=f"rho={rho:.2f}, p={pval:.2f}", ax=ax)
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
-    ax.set_title(save_path.split("/")[-1])
+    brain_area = Path(save_path).name
+    ax.set_title(brain_area)
     ax.legend()
     if save_path:
         fname = join(save_path, f"{y_label}.pdf")
@@ -150,7 +151,7 @@ def plot_example(freqs, psd, aperiodic_powers, neural_spiking, n_trials=30,
     axes[2, x_middle].set_xlabel("Time (s)", fontsize=fontsize, labelpad=20)
     [axes[2, j].set_xlabel(f"{j/4:.0f}", fontsize=fontsize)
      for j in range(0, n_trials, 4)]
-    brain_area = save_path.split("/")[-1]
+    brain_area = Path(save_path).name
     plt.suptitle(brain_area, fontsize=fontsize*2)
     if save_path:
         plt.savefig(join(save_path, f"{brain_area}.pdf"))
