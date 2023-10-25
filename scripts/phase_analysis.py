@@ -15,12 +15,13 @@ def phase_spiking(fname="steinmetz_2016-12-14_Cori.nc", brain_area="MOs"):
     lfp = _load_lfp(data, brain_area)
     neural_spiking = _load_spiking(data, brain_area)
 
-    spike_plot(lfp, neural_spiking, "alpha")
-    spike_plot(lfp, neural_spiking, "theta")
-    spike_plot_by_trials(lfp, neural_spiking, "alpha")
-    spike_plot_by_trials(lfp, neural_spiking, "theta")
-    spike_plot_by_neuron(lfp, neural_spiking, "alpha")
-    spike_plot_by_neuron(lfp, neural_spiking, "theta")
+    save_path = join(cfg.PLOT_PATH, brain_area)
+    spike_plot(lfp, neural_spiking, "alpha", save_path=save_path)
+    spike_plot(lfp, neural_spiking, "theta", save_path=save_path)
+    spike_plot_by_trials(lfp, neural_spiking, "alpha", save_path=save_path)
+    spike_plot_by_trials(lfp, neural_spiking, "theta", save_path=save_path)
+    spike_plot_by_neuron(lfp, neural_spiking, "alpha", save_path=save_path)
+    spike_plot_by_neuron(lfp, neural_spiking, "theta", save_path=save_path)
 
 
 def spike_plot(lfp, neural_spiking, band, save_path=None):
@@ -129,7 +130,7 @@ def spike_plot_by_trials(lfp, neural_spiking, band, save_path=None):
           f"{significant_trials_band}")
 
 
-def spike_plot_by_neuron(lfp, neural_spiking, band):
+def spike_plot_by_neuron(lfp, neural_spiking, band, save_path=None):
     significantly_phase_locked_neurons = []
     lowcut, highcut = cfg.BANDS[band]
 
@@ -196,7 +197,8 @@ def spike_plot_by_neuron(lfp, neural_spiking, band):
             plt.title(f"Spike-LFP Phase Distribution {band} band \n\n Neuron # {neuron_idx} \n Number of spikes: {sum(spiking_activity_neuron_i_concatenate)} \np_value= {p_value}", va='bottom')
             fig_name = (f"spike_lfp_phase_distribution_neuron_{neuron_idx}_"
                         f"{band}.pdf")
-            plt.savefig(join(cfg.PLOT_PATH, fig_name))
+            if save_path:
+                plt.savefig(join(save_path, fig_name))
 
     print(f"significant phase-locking with {band} in neurons #: {significantly_phase_locked_neurons}")
 
