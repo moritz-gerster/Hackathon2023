@@ -3,6 +3,8 @@ rawdata/*
 sourcedata/*
 derivatives/*
 results/*
+finish_next_time/*
+finish_next_time/*/*
 
 !rawdata/README.md
 !sourcedata/README.md
