@@ -3,14 +3,8 @@
 This cookiecutter organizes code and data according to the Brain Imaging Data Structure (BIDS) [1-4].
 
 - **sourcedata**: data as collected/received
-- **rawdata**: bidsified sourcedata
-- **derivatives**: rawdata after processing
-- **A truly neutral research cookie cutter**: folder with scripts
-- **docs**: docs
-- **tests**: tests
+- **scripts**: folder with scripts
 - **results**: plots, tables, ...
-
-- **CHANGES**: documents changes to the dataset
 
 ### References:
 
