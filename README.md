@@ -6,6 +6,10 @@ This cookiecutter organizes code and data according to the Brain Imaging Data St
 - **scripts**: folder with scripts
 - **results**: plots, tables, ...
 
+![Alt text](image.png)
+![Alt text](image-1.png)
+![Alt text](image-2.png)
+
 ### References:
 
 [1] Gorgolewski, Krzysztof J., Tibor Auer, Vince D. Calhoun, R. Cameron Craddock, Samir Das, Eugene P. Duff, Guillaume Flandin, et al. 2016. “The Brain Imaging Data Structure, a Format for Organizing and Describing Outputs of Neuroimaging Experiments.” Scientific Data 3 (June): 160044.
