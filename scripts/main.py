@@ -1,4 +1,4 @@
-from scripts.analysis_functions import correlations
+from scripts.spectral_analysis import correlations
 from scripts.phase_analysis import phase_spiking
 from scripts.utils import _get_brain_areas, _load_data
 
