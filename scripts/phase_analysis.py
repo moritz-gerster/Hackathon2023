@@ -25,8 +25,6 @@ def phase_spiking(fname="steinmetz_2016-12-14_Cori.nc", brain_area="MOs"):
 
 
 def spike_plot(lfp, neural_spiking, band, save_path=None):
-    # pooled_neurons = neural_spiking.sum(0)
-    # concatenate all 364 trials together
     spike_lfp_phases = _get_spike_lfp_phases(lfp, neural_spiking, band)
     # Create a polar histogram to visualize the spike phase distribution.
     # The `bins` parameter controls the number of bins in the polar plot.
@@ -41,13 +39,19 @@ def spike_plot(lfp, neural_spiking, band, save_path=None):
     ax.set_theta_zero_location("N")
     ax.set_theta_direction(-1)      # Rotate clockwise
 
+    pooled_neurons = neural_spiking.sum(0)
+    # concatenate all 364 trials together
+    spiking_activity_global_concatenate = np.hstack(pooled_neurons)
+
     # Normalize the bin heights so that the integral is 1 (density plot)
     width = 2 * np.pi / len(bins)
     ax.bar(bins[:-1], n, width=width, align="edge", edgecolor='k')
 
-    plt.title("Spike-LFP Phase Distribution Alpha band \n Number of spikes: "
-              "{sum(spiking_activity_global_concatenate)}\n p_value= "
-              "{p_value}", va='bottom')
+    plt.title(f"Spike-LFP Phase Distribution {band} band \n Number of spikes:"
+              f"{sum(spiking_activity_global_concatenate)}\n Number of neurons:"
+              f"{neural_spiking.shape[0]}", va='bottom'
+              )
+              
     save_path = join(save_path, f"spike_lfp_phase_distribution_{band}.pdf")
     if save_path:
         plt.savefig(save_path)
