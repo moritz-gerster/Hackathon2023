@@ -6,7 +6,7 @@ Hackathon organized by [CRC 295 ReTune](https://sfb-retune.de/en/events/retune-h
 
 My project with juliettevivien aimed at relating local field potential data to neural spiking activity, extracted from a public [neuropixel dataset](https://doi.org/10.1038/s41586-019-1787-x). We managed to replicate the findings from [Manning et al. (2009)](https://doi.org/10.1523/JNEUROSCI.2041-09.2009), Fig. 1.
 
-## Project organization:
+## Project organization
 
 - **sourcedata**: information on neuropixel dataset
 - **scripts**: analysis scripts
