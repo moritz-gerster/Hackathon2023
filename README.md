@@ -1,4 +1,6 @@
-# Hackathon2023
+# ReTune Hackathon 2023
+
+October 23-25, 2023 | Bad Belzig
 
 This cookiecutter organizes code and data according to the Brain Imaging Data Structure (BIDS) [1-4].
 
