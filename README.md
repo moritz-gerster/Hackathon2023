@@ -2,7 +2,7 @@
 
 October 23-25, 2023 | Bad Belzig, Germany
 
-Hackathon organized by [CRC 295 ReTune](https://sfb-retune.de/en/home/) to code on projects related to deep brain stimulation. 
+Hackathon organized by [CRC 295 ReTune](https://sfb-retune.de/en/events/retune-hackathon-2023-2/) to code on projects related to deep brain stimulation. 
 
 My project with juliettevivien aimed at relating local field potential data to neural spiking activity, extracted from a public [neuropixel dataset](https://doi.org/10.1038/s41586-019-1787-x). We managed to replicate the findings from [Manning et al. (2009)](https://doi.org/10.1523/JNEUROSCI.2041-09.2009), Fig. 1.
 
