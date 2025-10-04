@@ -2,6 +2,12 @@
 
 October 23-25, 2023 | Bad Belzig
 
+Hackathon organized by CRC 295 ReTune to code on projects related to deep brain stimulation.
+
+My project with Vivien aimed at relating local field potential data to neural spiking activity, extracted from a public neuropixel dataset.
+
+### Project organization:
+
 This cookiecutter organizes code and data according to the Brain Imaging Data Structure (BIDS) [1-4].
 
 - **sourcedata**: data as collected/received
