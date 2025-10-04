@@ -2,9 +2,9 @@
 
 October 23-25, 2023 | Bad Belzig, Germany
 
-Hackathon organized by [CRC 295 ReTune]([url](https://sfb-retune.de/en/home/)) to code on projects related to deep brain stimulation. 
+Hackathon organized by [CRC 295 ReTune](https://sfb-retune.de/en/home/) to code on projects related to deep brain stimulation. 
 
-My project with juliettevivien aimed at relating local field potential data to neural spiking activity, extracted from a public [neuropixel dataset]([url](https://doi.org/10.1038/s41586-019-1787-x)).
+My project with juliettevivien aimed at relating local field potential data to neural spiking activity, extracted from a public [neuropixel dataset](https://doi.org/10.1038/s41586-019-1787-x).
 
 ## Project organization:
 
@@ -16,7 +16,7 @@ My project with juliettevivien aimed at relating local field potential data to n
 ### Local field potential aperiodic broadband power significantly correlates with neural spiking activity
 ![Alt text](image.png)
 
-### LFP aperiodic broadband power tracks spiking activity over time - successful replication of Fig. 1 in [Manning et al. (2009)]([url](https://doi.org/10.1523/JNEUROSCI.2041-09.2009))
+### LFP aperiodic broadband power tracks spiking activity over time - successful replication of Fig. 1 in [Manning et al. (2009)](https://doi.org/10.1523/JNEUROSCI.2041-09.2009)
 ![Alt text](image-1.png)
 ### Spiking activity is locked to LFP phases
 ![Alt text](image-2.png)
